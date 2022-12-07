@@ -1,6 +1,16 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import { createApp } from 'vue';
+import App from './App.vue';
+import Footer from './Footer.vue';
+import Header from './Header.vue';
+import components from '@/components/UI';
 
-createApp(App).use(store).use(router).mount('#app')
+const app=createApp(App)
+
+components.forEach(component => {
+    app.component(component.name, component)
+})
+
+const myHeader=createApp(Header).mount('#header');
+const myFooter=createApp(Footer).mount('#footer');
+app.mount('#app'); 
+
