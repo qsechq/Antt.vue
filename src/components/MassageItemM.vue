@@ -108,7 +108,7 @@ export default {
 
             axios({
                 method: 'post',
-                url: './tg.php',
+                url: '../tg.php',
                 data: data
             })
                 .then(response => { })

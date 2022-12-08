@@ -1,55 +1,55 @@
 <template>
     <transition name="gounce">
-        <my-modal v-model:show="modalVisible">
-            <div class="close__wrapper" @click="hideModal">
-                <span class="close"></span>
-                <span class="close close--two"></span>
+    <my-modal v-model:show="modalVisible">
+        <div class="close__wrapper" @click="hideModal">
+            <span class="close"></span>
+            <span class="close close--two"></span>
+        </div>
+        <div class="modal__content-title modal__content-title--mob">{{ post.title }}</div>
+        <img :src="post.img" alt="product" class="modal__content-img">
+        <div class="modal__content-info">
+            <div class="modal__content-text">
+                <div class="modal__content-title">{{ post.title }}</div>
+                <div class="modal__content-p">{{ post.body }}
+                </div>
             </div>
-            <div class="modal__content-title modal__content-title--mob">{{ post.title }}</div>
-            <img :src="post.img" alt="product" class="modal__content-img">
-            <div class="modal__content-info">
-                <div class="modal__content-text">
-                    <div class="modal__content-title">{{ post.title }}</div>
-                    <div class="modal__content-p">{{ post.body }}
+            <form action="tg.php" class="modal__form" @submit.prevent="onSubmit">
+                <input :value="massageName = post.title" type="hidden">
+                <div class="modal__content-form">
+                    <div class="modal__content-radio">
+                        <div class="modal__radio-title">ВРЕМЯ МАССАЖА</div>
+                        <label class="modal__radio">
+                            <div class="modal__radio-wrapper">
+                                <input v-model="selectMassageTime" :value="post.timeOne" class="radio" type="radio"
+                                    name="option">
+                                <div class="radio__visible"></div>
+                                <div class="radio__text">{{ post.timeOne }}</div>
+                            </div>
+                            <div class="radio__sum">{{ post.priceOne }}</div>
+                        </label>
+                        <label class="modal__radio">
+                            <div class="modal__radio-wrapper">
+                                <input v-model="selectMassageTime" :value="post.timeTwo" class="radio" type="radio"
+                                    name="option">
+                                <div class="radio__visible"></div>
+                                <div class="radio__text">{{ post.timeTwo }}</div>
+                            </div>
+                            <div class="radio__sum">{{ post.priceTwo }}</div>
+                        </label>
                     </div>
                 </div>
-                <form action="tg.php" class="modal__form" @submit.prevent="onSubmit">
-                    <input :value="massageName = post.title" type="hidden">
-                    <div class="modal__content-form">
-                        <div class="modal__content-radio">
-                            <div class="modal__radio-title">ВРЕМЯ МАССАЖА</div>
-                            <label class="modal__radio">
-                                <div class="modal__radio-wrapper">
-                                    <input v-model="selectMassageTime" :value="post.timeOne" class="radio" type="radio"
-                                        name="option">
-                                    <div class="radio__visible"></div>
-                                    <div class="radio__text">{{ post.timeOne }}</div>
-                                </div>
-                                <div class="radio__sum">{{ post.priceOne }}</div>
-                            </label>
-                            <label class="modal__radio">
-                                <div class="modal__radio-wrapper">
-                                    <input v-model="selectMassageTime" :value="post.timeTwo" class="radio" type="radio"
-                                        name="option">
-                                    <div class="radio__visible"></div>
-                                    <div class="radio__text">{{ post.timeTwo }}</div>
-                                </div>
-                                <div class="radio__sum">{{ post.priceTwo }}</div>
-                            </label>
-                        </div>
-                    </div>
-                    <div class="modal__input-form">
-                        <input v-bind:value="nameInput" @input="(nameInput = $event.target.value)" placeholder="Имя"
-                            type="text" class="modal__input-js">
-                        <input v-bind:value="phoneInput" @input="(phoneInput = $event.target.value)"
-                            placeholder="Телефон" type="text" class="modal__input-js">
-                    </div>
-                    <my-button @click="onSubmit" class="btn__modal">Записаться</my-button>
-                    <span class="form__modal-info">После отправки с вами свяжутся в ближайшее время для назначения
-                        времени</span>
-                </form>
-            </div>
-        </my-modal>
+                <div class="modal__input-form">
+                    <input v-bind:value="nameInput" @input="(nameInput = $event.target.value)" placeholder="Имя"
+                        type="text" class="modal__input-js">
+                    <input v-bind:value="phoneInput" @input="(phoneInput = $event.target.value)" placeholder="Телефон"
+                        type="text" class="modal__input-js">
+                </div>
+                <my-button @click="onSubmit" class="btn__modal">Записаться</my-button>
+                <span class="form__modal-info">После отправки с вами свяжутся в ближайшее время для назначения
+                    времени</span>
+            </form>
+        </div>
+    </my-modal>
     </transition>
     <li :id="post.id" class="form__massage-item">
         <img :src="post.img" alt="Массаж" class="form__massage-img">
@@ -75,6 +75,11 @@ export default {
     data() {
         return {
             modalVisible: false,
+            nameInput: '',
+            phoneInput: '',
+            selectMassageTime: '',
+            massageName: '',
+            errors: []
         }
     },
     methods: {
@@ -97,15 +102,31 @@ export default {
                 time: this.selectMassageTime,
                 massage: this.massageName,
             }
+            // const xhr = new XMLHttpRequest();
+            // xhr.open('POST', 'C:\Users\HP\Desktop\antt\src\tg.php');
+            // xhr.send(JSON.stringify(data));
+
             axios({
                 method: 'post',
-                url: './tg.php',
+                url: '../tg.php',
                 data: data
             })
                 .then(response => { })
                 .catch(e => {
                     this.errors.push(e)
                 })
+
+            // axios.post(`https://webdev-api.loftschool.com/sendmail`, {
+            //     data: data,
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     port: 8080,
+            // })
+            //     .then(response => { })
+            //     .catch(e => {
+            //         this.errors.push(e)
+            //     })
         }
 
     }
@@ -114,27 +135,25 @@ export default {
 
 <style>
 .gounce-enter-active {
-    animation: gounce-in 0.7s;
+  animation: gounce-in 0.7s;
 }
-
 .gounce-leave-active {
     animation: gounce-in 0.7s reverse;
 }
-
 @keyframes gounce-in {
-    0% {
-        opacity: 0;
+  0% {
+    opacity: 0;
+    
+    transform: translateY(1550px);
+    z-index: 1;
+  }
 
-        transform: translateY(1550px);
-        z-index: 1;
-    }
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
 
-    100% {
-        opacity: 1;
-        transform: translateX(0px);
-
-    }
-
+  }
+ 
 }
 
 
