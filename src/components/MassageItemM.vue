@@ -1,6 +1,7 @@
 <template>
+    <transition name="gounce">
     <my-modal v-model:show="modalVisible">
-        <div class="close__wrapper"  @click="hideModal">
+        <div class="close__wrapper" @click="hideModal">
             <span class="close"></span>
             <span class="close close--two"></span>
         </div>
@@ -12,38 +13,44 @@
                 <div class="modal__content-p">{{ post.body }}
                 </div>
             </div>
-            <form class="modal__form">
+            <form action="tg.php" class="modal__form" @submit.prevent="onSubmit">
+                <input :value="massageName = post.title" type="hidden">
                 <div class="modal__content-form">
                     <div class="modal__content-radio">
                         <div class="modal__radio-title">ВРЕМЯ МАССАЖА</div>
                         <label class="modal__radio">
                             <div class="modal__radio-wrapper">
-                                <input class="radio" type="radio" name="option">
+                                <input v-model="selectMassageTime" :value="post.timeOne" class="radio" type="radio"
+                                    name="option">
                                 <div class="radio__visible"></div>
-                                <div class="radio__text">30 минут</div>
+                                <div class="radio__text">{{ post.timeOne }}</div>
                             </div>
-                            <div class="radio__sum">299 ₽</div>
+                            <div class="radio__sum">{{ post.priceOne }}</div>
                         </label>
                         <label class="modal__radio">
                             <div class="modal__radio-wrapper">
-                                <input class="radio" type="radio" name="option">
+                                <input v-model="selectMassageTime" :value="post.timeTwo" class="radio" type="radio"
+                                    name="option">
                                 <div class="radio__visible"></div>
-                                <div class="radio__text">1 час</div>
+                                <div class="radio__text">{{ post.timeTwo }}</div>
                             </div>
-                            <div class="radio__sum">399 ₽</div>
+                            <div class="radio__sum">{{ post.priceTwo }}</div>
                         </label>
                     </div>
                 </div>
                 <div class="modal__input-form">
-                    <input placeholder="Имя" type="text" class="modal__input-js">
-                    <input placeholder="Телефон" type="text" class="modal__input-js">
+                    <input v-bind:value="nameInput" @input="(nameInput = $event.target.value)" placeholder="Имя"
+                        type="text" class="modal__input-js">
+                    <input v-bind:value="phoneInput" @input="(phoneInput = $event.target.value)" placeholder="Телефон"
+                        type="text" class="modal__input-js">
                 </div>
-                <my-button class="btn__modal">Записаться</my-button>
-                <span class="form__modal-info">После отправки с вами свяжутся в ближайшее время для назначения времени</span>
+                <my-button @click="onSubmit" class="btn__modal">Записаться</my-button>
+                <span class="form__modal-info">После отправки с вами свяжутся в ближайшее время для назначения
+                    времени</span>
             </form>
         </div>
     </my-modal>
-
+    </transition>
     <li :id="post.id" class="form__massage-item">
         <img :src="post.img" alt="Массаж" class="form__massage-img">
         <div class="form__massage-info">
@@ -56,6 +63,8 @@
 
 <script>
 
+import axios from 'axios';
+
 export default {
     props: {
         post: {
@@ -65,22 +74,91 @@ export default {
     },
     data() {
         return {
-            modalVisible: false
+            modalVisible: false,
+            nameInput: '',
+            phoneInput: '',
+            selectMassageTime: '',
+            massageName: '',
+            errors: []
         }
     },
     methods: {
         showModal() {
             this.modalVisible = true;
         },
-        hideModal(){
+        hideModal() {
             this.modalVisible = false;
+        },
+        selectMassageTimeVal() {
+            this.selectMassageTime = this.value;
+        },
+        selectMassageName() {
+            this.massageName = this.value;
+        },
+        onSubmit() {
+            const data = {
+                name: this.nameInput,
+                phone: this.phoneInput,
+                time: this.selectMassageTime,
+                massage: this.massageName,
+            }
+            // const xhr = new XMLHttpRequest();
+            // xhr.open('POST', 'C:\Users\HP\Desktop\antt\src\tg.php');
+            // xhr.send(JSON.stringify(data));
+
+            axios({
+                method: 'post',
+                url: './tg.php',
+                data: data
+            })
+                .then(response => { })
+                .catch(e => {
+                    this.errors.push(e)
+                })
+
+            // axios.post(`https://webdev-api.loftschool.com/sendmail`, {
+            //     data: data,
+            //     headers: {
+            //         'Content-Type': 'application/json'
+            //     },
+            //     port: 8080,
+            // })
+            //     .then(response => { })
+            //     .catch(e => {
+            //         this.errors.push(e)
+            //     })
         }
+
     }
 }
 </script>
 
 <style>
-.form__modal-info{
+.gounce-enter-active {
+  animation: gounce-in 0.7s;
+}
+.gounce-leave-active {
+    animation: gounce-in 0.7s reverse;
+}
+@keyframes gounce-in {
+  0% {
+    opacity: 0;
+    
+    transform: translateY(1550px);
+    z-index: 1;
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(0px);
+
+  }
+ 
+}
+
+
+
+.form__modal-info {
     font-size: 12px;
     padding-top: 15px;
     align-self: flex-end;
@@ -111,40 +189,39 @@ export default {
     transform: rotate(137deg);
 }
 
-.btn__modal{
+.btn__modal {
     align-self: flex-end;
     font-size: 22px;
 }
 
-.modal__form{
+.modal__form {
     display: flex;
     flex-direction: column;
 }
 
-.modal__content-radio{
+.modal__content-radio {
     margin-bottom: 15px;
 }
 
-.modal__input-js{
-    margin-bottom: 15px;
-}
 
-.modal__input-js:last-child{
+.modal__input-js:last-child {
     margin-bottom: 30px;
 }
 
-.modal__input-js{
+.modal__input-js {
     width: 100%;
-    height: 35px;
+    height: 40px;
     border-radius: 5px;
     background: #fff;
     color: #000;
-    padding: 5px;
+    padding: 10px;
     border: 0;
     border: 3px solid #000;
+    margin-bottom: 15px;
+    transition: 0.3s;
 }
 
-.modal__input-js:focus-visible{
+.modal__input-js:focus-visible {
     outline: none;
     border-color: #fac83a;
 }
@@ -205,6 +282,7 @@ export default {
     align-items: flex-start;
     padding: 20px 20px;
     position: relative;
+    border: 1px solid #fac83a;
 }
 
 .modal__content-img {

@@ -20,12 +20,12 @@ export default {
     data(){
         return{
             posts:[
-                {id:7, title: 'Женский массаж', body: 'Женский 10 101 Женский 10 101', img:require('../img/photo1666251465.jpeg')},
-                {id:8, title: 'Анти массаж', body: 'По феншую, тест надпись, лучшийВауЙщуцц', img:require('../img/photo1666251465.jpeg')},
-                {id:9, title: 'Защитный массаж', body: 'По феншую, тест надпись, лучшийВауЙщуцц', img:require('../img/photo1666251465.jpeg')},
-                {id:10, title: 'Ариэльский массаж', body: 'По феншую, тест надпись, лучшийВауЙщуцц', img:require('../img/photo1666251465.jpeg')},
-                {id:11, title: '12 массаж', body: 'По феншую, тест надпись, лучшийВауЙщуцц', img:require('../img/photo1666251465.jpeg')},
-                {id:12, title: 'Воооо массаж', body: 'По феншую, тест надпись, лучшийВауЙщуцц', img:require('../img/photo1666251465.jpeg')}
+                {id:7, title: 'Женский массаж', body: 'Женский 10 101 Женский 10 101', img:require('../img/photo1666251465.jpeg'), timeOne:'30 минут', timeTwo:'3 часa', priceOne: '55500 ₽', priceTwo: '5500 ₽'},
+                {id:8, title: 'Анти массаж', body: 'По феншую, тест надпись, лучшийВауЙщуцц', img:require('../img/photo1666251465.jpeg'), timeOne:'35 минут', timeTwo:'1 час', priceOne: '1500 ₽', priceTwo: '5500 ₽'},
+                {id:9, title: 'Защитный массаж', body: 'По феншую, тест надпись, лучшийВауЙщуцц', img:require('../img/photo1666251465.jpeg'), timeOne:'35 минут', timeTwo:'1 час', priceOne: '1500 ₽', priceTwo: '5500 ₽'},
+                {id:10, title: 'Ариэльский массаж', body: 'По феншую, тест надпись, лучшийВауЙщуцц', img:require('../img/photo1666251465.jpeg'), timeOne:'35 минут', timeTwo:'1 час', priceOne: '1500 ₽', priceTwo: '5500 ₽'},
+                {id:11, title: '12 массаж', body: 'По феншую, тест надпись, лучшийВауЙщуцц', img:require('../img/photo1666251465.jpeg'), timeOne:'35 минут', timeTwo:'1 час', priceOne: '1500 ₽', priceTwo: '5500 ₽'},
+                {id:12, title: 'Воооо массаж', body: 'По феншую, тест надпись, лучшийВауЙщуцц', img:require('../img/photo1666251465.jpeg'), timeOne:'35 минут', timeTwo:'1 час', priceOne: '1500 ₽', priceTwo: '5500 ₽'}
             ]
         }
     },

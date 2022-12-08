@@ -4,13 +4,18 @@ import Footer from './Footer.vue';
 import Header from './Header.vue';
 import components from '@/components/UI';
 
-const app=createApp(App)
+const app=createApp(App);
+const myHeader=createApp(Header);
 
 components.forEach(component => {
     app.component(component.name, component)
 })
 
-const myHeader=createApp(Header).mount('#header');
+components.forEach(component => {
+    myHeader.component(component.name, component)
+})
+
+myHeader.mount('#header');
 const myFooter=createApp(Footer).mount('#footer');
 app.mount('#app'); 
 

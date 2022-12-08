@@ -86,7 +86,7 @@ section {
 }
 
 main {
-    margin-bottom: 400px;
+    margin-bottom: 445px;
     z-index: 10;
     position: relative;
     background: #000;
