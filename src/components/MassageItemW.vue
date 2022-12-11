@@ -102,9 +102,6 @@ export default {
                 time: this.selectMassageTime,
                 massage: this.massageName,
             }
-            // const xhr = new XMLHttpRequest();
-            // xhr.open('POST', 'C:\Users\HP\Desktop\antt\src\tg.php');
-            // xhr.send(JSON.stringify(data));
 
             axios({
                 method: 'post',
@@ -116,17 +113,6 @@ export default {
                     this.errors.push(e)
                 })
 
-            // axios.post(`https://webdev-api.loftschool.com/sendmail`, {
-            //     data: data,
-            //     headers: {
-            //         'Content-Type': 'application/json'
-            //     },
-            //     port: 8080,
-            // })
-            //     .then(response => { })
-            //     .catch(e => {
-            //         this.errors.push(e)
-            //     })
         }
 
     }
