@@ -1,6 +1,6 @@
 <template>
 
-<a href="#" class="btn"><slot></slot></a>
+<a  class="btn"><slot></slot></a>
 </template>
 
 <script>
@@ -11,7 +11,7 @@ export default{
 
 <style>
 .btn {
-    background: #fac83a;
+    background: #e5aa52;
     padding: 7px 10px;
     border-radius: 5px;
     color: #000;

@@ -3,8 +3,8 @@
     <benefits-section></benefits-section>
     <about-section></about-section>
     <massage-section></massage-section>
-    <map-section></map-section>
     <promo-section></promo-section>
+    <map-section></map-section>
 
 </template>
 
@@ -36,8 +36,9 @@ html {
 
 body {
     background-color: #000;
-    color: #fac83a;
+    color: #e5aa52;
     margin: 0;
+    overflow-x: hidden;
 }
 
 *{
@@ -45,7 +46,7 @@ body {
 }
 
 a {
-    color: #fac83a;
+    color: #e5aa52;
     text-decoration: none;
 }
 
@@ -74,7 +75,7 @@ h4 {
 }
 
 .btn {
-    background: #fac83a;
+    background: #e5aa52;
     padding: 7px 10px;
     border-radius: 5px;
     color: #000;

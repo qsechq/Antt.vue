@@ -37,7 +37,7 @@ export default {
 }
 
 .benefit__item {
-    background: #fac83a;
+    background: #e5aa52;
     border-radius: 5px;
     color: #000;
     width: calc(50% - 10px);

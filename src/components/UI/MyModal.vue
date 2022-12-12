@@ -40,7 +40,6 @@ export default {
 .modal__content{
     background: #000;
     width: 829px;
-    height: 575px;
     border-radius: 12px;
     display: flex;
     align-items: flex-start;

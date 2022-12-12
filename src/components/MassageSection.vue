@@ -2,7 +2,7 @@
   <section id="massage" class="massage">
     <div class="container">
       <h1 class="massage__title">Выбери свой массаж</h1>
-      <div class="massage__choise">
+      <!-- <div class="massage__choise">
         <ul class="massage__choise-list">
           <li class="massage__choise-item">
             <label class="massage__choise-radio">
@@ -20,36 +20,23 @@
             </label>
           </li>
         </ul>
-      </div>
-      <form class="form__massage">
+      </div> -->
+      <div class="form__massage">
         <transition name="bounce">
-          <massage-list-m v-show="showSelectMassage === 'man'"></massage-list-m>
+          <massage-list></massage-list>
         </transition>
-        <transition name="dounce">
-          <massage-list-w v-show="showSelectMassage === 'wooman'"></massage-list-w>
-        </transition>
-      </form>
+      </div>
     </div>
   </section>
 
 </template>
 
 <script>
-import MassageListM from './MassageListM.vue';
-import MassageListW from './MassageListW.vue';
+import MassageList from './MassageList.vue';
 
 export default {
-  components: { MassageListM, MassageListW },
-  data() {
-    return {
-      showSelectMassage: 'man'
-    }
-  },
-  methods: {
-    ChoiseSelectMassage() {
-      this.showSelectMassage = this.value;
-    }
-  }
+  components: { MassageList},
+
 }
 </script>
 
@@ -99,7 +86,6 @@ export default {
 .form__massage{
   display: flex;
   flex-wrap: nowrap;
-  height: 924px;
 }
 
 

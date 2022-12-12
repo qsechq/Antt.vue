@@ -27,7 +27,7 @@
                             </div>
                             <div class="radio__sum">{{ post.priceOne }}</div>
                         </label>
-                        <label class="modal__radio">
+                        <label v-if="post.timeTwo"  class="modal__radio">
                             <div class="modal__radio-wrapper">
                                 <input v-model="selectMassageTime" :value="post.timeTwo" class="radio" type="radio"
                                     name="option">
@@ -35,6 +35,15 @@
                                 <div class="radio__text">{{ post.timeTwo }}</div>
                             </div>
                             <div class="radio__sum">{{ post.priceTwo }}</div>
+                        </label>
+                        <label v-if="post.timeThree" class="modal__radio">
+                            <div class="modal__radio-wrapper">
+                                <input v-model="selectMassageTime" :value="post.timeThree" class="radio" type="radio"
+                                    name="option">
+                                <div class="radio__visible"></div>
+                                <div class="radio__text">{{ post.timeThree }}</div>
+                            </div>
+                            <div class="radio__sum">{{ post.priceThree }}</div>
                         </label>
                     </div>
                 </div>
@@ -134,6 +143,7 @@ export default {
 </script>
 
 <style>
+
 .gounce-enter-active {
   animation: gounce-in 0.7s;
 }
@@ -156,6 +166,47 @@ export default {
  
 }
 
+#classic{
+    width: calc(50% - 10px);
+    max-width: none;
+}
+
+#classic .form__massage-img{
+    width: 100%;
+    height: unset;
+}
+
+#deep-tissue{
+    width: calc(50% - 10px);
+    max-width: none;  
+}
+
+#deep-tissue .form__massage-img{
+    width: 100%;
+    height: unset;
+}
+
+
+#anti-cellulite{
+    width: calc(50% - 10px);
+    max-width: none;  
+}
+
+#anti-cellulite .form__massage-img{
+    width: 100%;
+    height: unset;
+}
+
+
+#lymphatic-drainage{
+    width: calc(50% - 10px);
+    max-width: none;  
+}
+
+#lymphatic-drainage .form__massage-img{
+    width: 100%;
+    height: unset;
+}
 
 
 .form__modal-info {
@@ -173,7 +224,7 @@ export default {
 .close {
     height: 2px;
     width: 20px;
-    background: #fac83a;
+    background: #e5aa52;
     position: absolute;
     transform: rotate(43deg);
 }
@@ -223,22 +274,20 @@ export default {
 
 .modal__input-js:focus-visible {
     outline: none;
-    border-color: #fac83a;
+    border-color: #e5aa52;
 }
 
 
 .form__massage-img {
-    width: 240px;
-    height: 220px;
+    width: 100%;
     border-radius: 5px;
     margin-bottom: 10px;
 }
 
 .form__massage-item {
-    background: #fac83a;
+    background: #e5aa52;
     border-radius: 5px;
-    height: 370px;
-    max-width: 250px;
+    width: calc(33% - 10px);
     padding: 5px 5px 10px;
     display: flex;
     flex-direction: column;
@@ -276,13 +325,12 @@ export default {
 .modal__content {
     background: #000;
     width: 829px;
-    height: 575px;
     border-radius: 12px;
     display: flex;
     align-items: flex-start;
     padding: 20px 20px;
     position: relative;
-    border: 1px solid #fac83a;
+    border: 1px solid #e5aa52;
 }
 
 .modal__content-img {
@@ -321,7 +369,7 @@ export default {
 
 .radio__visible {
     margin-right: 15px;
-    border: 2px solid #fac83a;
+    border: 2px solid #e5aa52;
     height: 20px;
     width: 20px;
     border-radius: 50%;
@@ -334,7 +382,7 @@ export default {
     content: '';
     height: 10px;
     width: 10px;
-    background: #fac83a;
+    background: #e5aa52;
     border-radius: 50%;
     display: none;
 }
@@ -358,6 +406,9 @@ export default {
     font-size: 22px;
     margin-bottom: 15px;
 }
+
+
+
 
 .modal__content-title--mob {
     display: none;
